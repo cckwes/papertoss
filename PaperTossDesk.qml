@@ -21,16 +21,24 @@ Item {
     property int score: 0;
     property bool dropping: false;
     property int rebound: 0;        // 0 for not rebound. 1 for left, 2 for right
+    property real paperDir: 0;
 
     Component.onCompleted: {
         appWindow.wind = (Math.round(Math.random()*200) / 20 - 5).toFixed(2);
     }
 
+//    Image {
+//        anchors.fill: parent
+//        source: "landscape1.png"
+//    }
+
     Image {
         id: paperBin
-        width: 60
+        width: 120
         height: 150
-        source: "bin.png"
+        smooth: true
+        //fillMode: Image.PreserveAspectFit
+        source: "images/bin.png"
         anchors.horizontalCenter: parent.horizontalCenter
         y: appWindow.height - paperBin.height - 350
         z: (appWindow.dropping) ? 4 : 2
@@ -41,7 +49,7 @@ Item {
         width: 50
         height: 50
         smooth: true
-        source: "paper.png"
+        source: "images/paper.png"
         x: appWindow.oriX
         y: appWindow.oriY
         z: 3
@@ -100,41 +108,111 @@ Item {
         //}
     }
 
-    Text {
-        id: windSpeedText
-        text: appWindow.windspeed
-        anchors.horizontalCenter: parent.horizontalCenter
-        y: 20
+    Column {
+        spacing: 20
+        width: parent.width
+        anchors.top: parent.top
+        anchors.topMargin: 20
+        anchors.left: parent.left
+        anchors.leftMargin: 20
+
+        Row {
+            width: parent.width / 2
+            spacing: 20
+
+            Text {
+                id: windSpeedLabel
+                text: "Wind: "
+                font.weight: Font.Bold
+                font.pixelSize: 25
+            }
+
+            Text {
+                id: windSpeedText
+                text: appWindow.windspeed + " m/s"
+                font.pixelSize: 25
+            }
+        }
+
+//        Row {
+//            width: parent.width / 2
+//            spacing: 20
+
+//            Text {
+//                id: windDirection
+//                text: "Direction: "
+//                font.weight: Font.Bold
+//                font.pixelSize: 25
+//            }
+
+//            Image {
+//                id: windIndicator
+//                height: 50
+//                smooth: true
+//                fillMode: Image.PreserveAspectFit
+//                source: (appWindow.wind > 0) ? "right.png" : "left.png"
+//            }
+//        }
+
+        Row {
+            width: parent.width / 2
+            spacing: 20
+
+            Text {
+                id: winLabel
+                text: "Win Streak: "
+                font.weight: Font.Bold
+                font.pixelSize: 25
+            }
+
+            Text {
+                id: scoreText
+                text: appWindow.score
+                font.pixelSize: 25
+            }
+        }
     }
 
     Image {
-        id: windIndicator
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: windSpeedText.bottom
-        anchors.topMargin: 20
-        source: (appWindow.wind > 0) ? "right.png" : "left.png"
-    }
-
-    Text {
-        id: scoreText
-        text: appWindow.score
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: windIndicator.bottom
-        anchors.topMargin: 50
-    }
-
-    Rectangle {
         id: quitArea
-        color: "red"
         anchors.right: parent.right
+        anchors.rightMargin: 20
         anchors.top: parent.top
+        anchors.topMargin: 20
         width: 80
-        height: 80
+        source: "images/quit.png"
+        fillMode: Image.PreserveAspectFit
 
         MouseArea {
             anchors.fill: parent
             onClicked: Qt.quit()
         }
+    }
+
+    Image {
+        id: toRightFan
+        anchors.left: parent.left
+        anchors.leftMargin: 30
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 150
+        height: 150
+        fillMode: Image.PreserveAspectFit
+        source: "images/fan_right.png"
+        smooth: true
+        visible: (appWindow.wind > 0) ? true : false
+    }
+
+    Image {
+        id: toLeftFan
+        anchors.right: parent.right
+        anchors.rightMargin: 30
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 150
+        height: 150
+        fillMode: Image.PreserveAspectFit
+        source: "images/fan_left.png"
+        smooth: true
+        visible: (appWindow.wind < 0) ? true : false
     }
 
     Timer {
