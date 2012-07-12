@@ -1,0 +1,7 @@
+papertoss is a project which tries to clone the popular simple Paper Toss game with the full gameplay written using QtQuick and backend using Python
+
+the "main.py" file is the python file for displaying the qml file
+
+the "PaperToss.qml" and "main.qml" is for harmattan with harmattan qml components
+
+the "PaperTossDesk.qml" is for desktop or other platform which is built using pure qml 
