@@ -1,0 +1,37 @@
+#!/usr/bin/python
+
+#
+# qml viewer using pyside
+#
+
+import sys
+from PySide.QtCore import *
+from PySide.QtGui import *
+from PySide.QtDeclarative import *
+
+
+#sys.argv[0] = "PaperToss"
+app = QApplication(sys.argv)
+view = QDeclarativeView()
+view.setSource(QUrl('PaperTossDesk.qml'))
+#view.engine().quit.connect(view.close)
+view.showMaximized()
+
+sys.exit(app.exec_())
+
+#!/usr/bin/python
+ 
+# Import PySide classes
+#import sys
+#from PySide.QtCore import *
+#from PySide.QtGui import *
+ 
+ 
+# Create a Qt application
+#app = QApplication(sys.argv)
+# Create a Label and show it
+#label = QLabel("Hello World")
+#label.show()
+# Enter Qt application main loop
+#app.exec_()
+#sys.exit()

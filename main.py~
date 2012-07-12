@@ -1,0 +1,20 @@
+#!/usr/bin/python
+
+#
+# qml viewer using pyside
+#
+
+from PySide.QtCore import *
+from PySide.QtGui import *
+from PySide.QtDeclarative import *
+import sys
+
+sys.argv[0] = "PaperToss"
+app = QApplication(sys.argv)
+view = QDeclarativeView()
+tossEngine = view.rootObject()
+tossEngine.quit.connect(app.quit())
+view.setSource('main.qml')
+view.showFullScreen()
+
+app.exec_()
