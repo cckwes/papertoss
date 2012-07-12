@@ -26,21 +26,22 @@ Item {
         appWindow.wind = (Math.round(Math.random()*200) / 20 - 5).toFixed(2);
     }
 
-    Rectangle {
+    Image {
         id: paperBin
         width: 60
         height: 150
-        color: "black"
+        source: "bin.png"
         anchors.horizontalCenter: parent.horizontalCenter
         y: appWindow.height - paperBin.height - 350
         z: (appWindow.dropping) ? 4 : 2
     }
 
-    Rectangle {
+    Image {
         id: paper
         width: 50
         height: 50
-        color: "blue"
+        smooth: true
+        source: "paper.png"
         x: appWindow.oriX
         y: appWindow.oriY
         z: 3
