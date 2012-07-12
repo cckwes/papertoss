@@ -127,12 +127,12 @@ Item {
         color: "red"
         anchors.right: parent.right
         anchors.top: parent.top
-    width: 80
-    height: 80
+        width: 80
+        height: 80
 
         MouseArea {
-        anchors.fill: parent
-        onClicked: Qt.quit()
+            anchors.fill: parent
+            onClicked: Qt.quit()
         }
     }
 
