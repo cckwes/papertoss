@@ -22,9 +22,11 @@ Item {
     property bool dropping: false;
     property int rebound: 0;        // 0 for not rebound. 1 for left, 2 for right
     property real paperDir: 0;
+    property int hScore: 0;
 
     Component.onCompleted: {
         appWindow.wind = (Math.round(Math.random()*200) / 20 - 5).toFixed(2);
+        appWindow.hScore = tSettings.getHighScore(0);
     }
 
 //    Image {
@@ -62,7 +64,7 @@ Item {
         onPressed: {
             initialMouseX = mouse.x;
             initialMouseY = mouse.y;
-        appWindow.flipping = true;
+            appWindow.flipping = true;
 //            if (initialMouseX >= 215 && initialMouseX <= 265 && initialMouseY >= 804 && initialMouseY <= 854 ) {
                 //the press is inside the paper area, register the press
 //                console.log("Initial mouse x: " + mouse.x);
@@ -168,6 +170,24 @@ Item {
             Text {
                 id: scoreText
                 text: appWindow.score
+                font.pixelSize: 25
+            }
+        }
+
+        Row {
+            width: parent.width / 2
+            spacing: 20
+
+            Text {
+                id: hsoreLabel
+                text: "High Score: "
+                font.weight: Font.Bold
+                font.pixelSize: 25
+            }
+
+            Text {
+                id: hscoreText
+                text: appWindow.hScore
                 font.pixelSize: 25
             }
         }

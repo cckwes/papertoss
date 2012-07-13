@@ -20,6 +20,13 @@ function startThrow() {
             if ( paper.x > (paperBin.x - paper.width / 5 * 2)  && paper.x < (paperBin.x + paperBin.width - paper.width / 5 * 2) ) {
                 //considered in
                 appWindow.score += 1;
+
+                //check if high score
+                if (appWindow.score > appWindow.hScore) {
+                    appWindow.hScore = appWindow.score;
+                    tSettings.setHighScore(0,appWindow.score);
+                }
+
                 paper.x = paperBin.x + ((paperBin.width - paper.width) / 2);
                 paper.y = appWindow.height - (Math.sin(count/100*2.5507)*(appWindow.height / 854 * 700));
 //                appWindow.dropping = true;
